@@ -1,0 +1,41 @@
+<div class="admin">
+  <h4>Hello Admin</h4>
+  <hr/>
+  <div class="container">
+  <div class="row">
+    <!-- <div class="col-lg-12 col-sm-12 col-xs-12 alert alert-success" ng-show="isDisplay">
+        <strong>{{successMessage }}</strong>
+    </div> -->
+  </div>
+  <div class="row">
+      <div class="col-md-4">
+
+      </div>
+    <div class="col-md-4">
+  
+        <form style="border:1px solid #ccc"  >
+          <label for="uname"><b>Username</b></label>
+          <div>
+            <input type="text" placeholder="Enter Username" name="uname" [(ngModel)]="admin.email" (keyup)="heldat($event)" >
+        <span *ngIf="kaldat==true" style="color:red">Email fieldare required</span>
+      </div>
+            <label for="psw"><b>Password</b></label>
+            <div>
+            <input type="password" placeholder="Enter Password" autocomplete="password" name="pass" [(ngModel)]="admin.password" >
+            <span *ngIf="kaldat==true" style="color:red">Email fieldare required</span>
+          </div>  
+            <button type="submit"  class="lgbtn" (click)="submit(admin)" >Login</button>
+            <label>
+              <input type="checkbox" checked="checked" name="remember" > Remember me
+            </label>
+            <div style="background-color:#f1f1f1">
+              <!-- <span class="psw">Forgot <a routerLink="/forget">password?</a></span> -->
+            </div>
+        </form>
+    </div>
+    <div class="col-md-4">
+
+      </div>
+  </div>
+</div>
+</div>

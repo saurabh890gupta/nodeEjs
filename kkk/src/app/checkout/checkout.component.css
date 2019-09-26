@@ -1,0 +1,46 @@
+.back{
+    border:1px solid#f1f1f1;
+    color:white;
+    padding: 9px;
+    background-color:#f78000;
+    border-radius: 5px;
+}
+.confirm{
+    border:1px solid#f1f1f1;
+    color:white;
+    padding: 9px;
+    background-color:
+    #2b8fa4;
+    border-radius: 5px;
+   
+}
+.space{
+    height: 30px;
+    width: 15px;
+   
+}
+.nofound {
+    height: 30px;
+    box-shadow: 0 0 8px 0 rgba(17, 22, 26, 0.16), 0 4px 8px 0 rgba(17, 22, 26, 0.08), 0 8px 16px 0 rgba(17, 22, 26, 0.08)
+}
+.nofound p{
+    padding-left: 13px;
+    padding-top:7px; ;
+}
+.nofound p i{
+    padding-right: 16px;
+  
+}
+.custom-select{
+    border-bottom: 1px solid #cecece;
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-radius: 0px !important;
+    box-shadow: none !important;
+}
+.datagate{
+    width: 400px;
+height: 150px;
+   box-shadow: 0 0 8px 0 rgba(17, 22, 26, 0.16), 0 4px 8px 0 rgba(17, 22, 26, 0.08), 0 8px 16px 0 rgba(17, 22, 26, 0.08);
+}

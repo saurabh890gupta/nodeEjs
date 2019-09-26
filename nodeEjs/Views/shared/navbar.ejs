@@ -1,0 +1,21 @@
+<header>
+    <div class="container">
+        <div class="row" >
+            <div class="col-md-4">
+                <div >
+                    <a ><img src="" alt="img" /></a>
+                </div> 
+            </div>
+            <div class="col-md-8">
+                <nav>
+                    <ul >
+                        <%for(let i =0; i < navData.length; i++) {%>
+                            <li><a href="<%=navData[i].url%>" class="<%=navData[i].class%>"><%=navData[i].name%></a></li>
+                        <%}%>
+                    
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>

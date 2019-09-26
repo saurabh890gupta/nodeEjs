@@ -1,0 +1,338 @@
+
+<div class="checkoutPage">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+          <div class="nofound" >
+              <p><span class="glyphicon glyphicon-home"></span> / CheckOut <span class="pull-right">Total : <i class="fa fa-inr" >  {{sum}} </i></span></p>
+        
+        </div>
+        <form >
+                               
+                                     
+          <h3>BillingAddress</h3>
+          <div class="row">
+            <div class="col-md-6">
+                    <div class="form-group">
+                            <label for="Name"><b>Name *</b></label>
+                            <input type="text" class="w3-input" placeholder="Fisrt name" name="name" value="firstName" [(ngModel)]="checkOut.firstName" required /> 
+                    
+                    </div> 
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                        <label for="email"><b>Last Name *</b></label>
+                        <input type="text" class="w3-input" placeholder="Last Name" name="lastname"   value="lastName" [(ngModel)]="checkOut.lastName" required /> 
+                
+                </div> 
+            </div>
+          </div>
+            <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="Address"><b>Address *</b></label>
+              <textarea name="Address" class="w3-input" class="form-control" placeholder="Address 1"  value="address" [(ngModel)]="checkOut.address"> </textarea>
+            </div>
+          </div>
+        </div>
+          <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+                    <label for="number"><b>Postcode *</b></label>
+                    <input type="text" class="w3-input" placeholder="Post Code" name="postcode" value="postcode" [(ngModel)]="checkOut.postcode"   />
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+                    <label for="City"><b>City *</b></label>
+                    <input type="text" class="w3-input" placeholder="City" name="city" value="city" [(ngModel)]="checkOut.city"  />
+            </div>
+          </div>
+          <div class="col-md-4">
+              <div class="form-group">
+                  <label for="sel1">State *</label>
+                  <select class="form-control custom-select" name="state" value="name" [(ngModel)]="checkOut.State">
+                      <option selected="true" disabled="disabled">Choose state</option>
+                      <option *ngFor='let statelist of state' [ngValue]="statelist.name">
+                        {{statelist.name}}
+                      </option> 
+                    
+                    <!-- <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option> -->
+                  </select>
+                
+                 
+                </div>
+            <!-- <div class="form-group">
+              <label for="SelectName"><b>State *</b></label>
+              <input type="text" class="w3-input" placeholder="Select Name" name="address"  ng-required />
+            </div> -->
+          </div> 
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="Country"><b>Country *</b></label>
+                <select class="form-control custom-select" value="name" name="name" [(ngModel)]="checkOut.country">
+                    <option selected="true" disabled="disabled">Choose country</option>
+                    <option *ngFor='let countrylist of country' [ngValue]="countrylist.name">
+                      {{countrylist.name}}
+                    </option> 
+                </select>
+                <!-- <input type="text" class="w3-input" placeholder="Country " name="address"  ng-required /> -->
+              </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                        <label for="City"><b>Mobile *</b></label>
+                        <input type="text" class="w3-input" placeholder="Mobile" name="mobile" value="mobile" [(ngModel)]="checkOut.mobile"  />
+                </div>
+              </div>
+          </div>
+          <div class="col-md-12">
+              <label for="PaymentMethod"><b>Payment Method</b></label>
+            <div class="form-group">
+              <div class="checkbox">
+                  <label>
+                      <input type="checkbox" value="paymentMode" name="paymentMode" value="paymentMethod"  [(ngModel)]="checkOut.paymentMethod" >Credit Card /Debit Card
+                  </label>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+              <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="termname" value="termCondtion"[(ngModel)]="checkOut.termCondtion" />
+                        I have read and agree to the <b>Termes & conditions</b>.
+                      </label>
+                </div> 
+              </div>
+          </div>
+          <div class="col-md-12">
+           
+              <div class="pull-left">
+                  <input type='submit' class="back" name='finish' value='Back' /> 
+              </div>
+          
+              <div class="pull-left" style=" padding-left: 4px;" >  
+                <!-- data-toggle="modal" data-target="#exampleModalLong" -->
+                  <input type='submit' class="confirm" name='finish' value='Confirm Order' (click)="submitCheckOut(checkOut)"/> 
+              </div>
+
+          </div>
+          <div class="col-md-3">
+            <div class="space"></div>  
+          </div>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- {{checkOutData}} -->
+            <!-- <div *ngIf="checkOutData==true"> -->
+  <!-- <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true" >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          CREDIT/DEBIT CARD
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+
+                        <div class="datagate">
+                          <p>Mr.<span>{{checkOut.firstName}} {{checkOut.lastName}}</span><br/></p>
+                          {{checkOut.address}}<br/>
+                            {{checkOut.city}}{{checkOut.postcode}}
+                            {{checkOut.State}}<br/>
+                            <P>Mobile : {{checkOut.mobile}} </P>
+                            
+   <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true" >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          CREDIT/DEBIT CARD
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+
+                        <div class="datagate">
+                             
+   <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true" >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          CREDIT/DEBIT CARD
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+
+                        <div class="datagate">
+                          </div>
+   <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true" >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          CREDIT/DEBIT CARD
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+
+                        <div class="datagate">
+                      
+   <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true" >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          CREDIT/DEBIT CARD
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+
+                        <div class="datagate">
+                    </div>
+   <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true" >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          CREDIT/DEBIT CARD
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+
+                        <div class="datagate">
+              </div>
+   <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true" >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          CREDIT/DEBIT CARD
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+
+                        <div class="datagate">
+              <div class="row">
+                <div class="col-md-12">
+                        <div class="form-group">
+                                <label for="Name"><b>Card Number *</b></label>
+                                <input type="text" class="w3-input" placeholder="card number" name="name" required /> 
+                        
+                        </div> 
+                        <div class="form-group">
+                            <label for="Name"><b>Name on Card *</b></label>
+                            <input type="text" class="w3-input" placeholder="Name on Card" name="name" required /> 
+                    
+                      </div> 
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                              <label for="sel1">Expiry Month *</label>
+                              <select class="form-control custom-select" id="sel1">
+                                
+                                  <option value="01">January</option>
+                                  <option value="02">February </option>
+                                  <option value="03">March</option>
+                                  <option value="04">April</option>
+                                  <option value="05">May</option>
+                                  <option value="06">June</option>
+                                  <option value="07">July</option>
+                                  <option value="08">August</option>
+                                  <option value="09">September</option>
+                                  <option value="10">October</option>
+                                  <option value="11">November</option>
+                                  <option value="12">December</option>
+                              </select>
+                            
+                            
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="sel1">Expiry Year *</label>
+                                <select class="form-control custom-select" id="sel1">
+                                    <option value="16"> 2016</option>
+                                    <option value="17"> 2017</option>
+                                    <option value="18"> 2018</option>
+                                    <option value="19"> 2019</option>
+                                    <option value="20"> 2020</option>
+                                    <option value="21"> 2021</option>
+                                </select>
+                              
+                              
+                            </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="CVV">CVV *</label>
+                            <input type="text" />
+                            <p>Last 3 digits printed on the back of the card</p>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group" id="credit_cards">
+                                <img src="assets/images/cardimg/mastercard.png" alt="img" id="visa">
+                                <img src="assets/images/cardimg/visa.png" alt="img" id="mastercard">
+                                <img src="assets/images/cardimg/maestro.png" alt="img" id="amex">
+                            </div>
+                        </div>
+                      </div>
+                      <input type="checkbox" name="checkbox"> I have read and agree to the <b>Termes & conditions</b>.
+                </div>
+              
+              </div>
+        </div>
+        <div class="modal-footer">
+           <span> <i class="fa fa-inr"></i><strong>{{sum}}</strong> &nbsp; &nbsp;
+          <button type="button" class="btn btn-primary">Pay Now</button></span>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+<!-- </div> -->
+
+
+
+
+
+

@@ -1,0 +1,42 @@
+ 
+            <div class="banner">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="banner-section">
+                        <h1>property Searching Just Got So Easy</h1>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi deserunt deleniti, ullam commodi sit ipsam laboriosam velit adipisci quibusdam aliquam teneturo!</p>
+                       
+                        <div class="search-form wow pulse" data-wow-delay="0.8s">
+                              <form class="form-inline">
+                                <button class="btn toggle-btn" type="button"><i class="fa fa-bars"></i></button>
+                                  <div class="form-group">
+                                      <input type="text" class="form-control" class="srch" placeholder="Key word" >
+                                  </div>
+                                  <div class="form-group">                                   
+                                      <select id="basic1" class="selectpicker show-tick form-control" data-live-search="true" data-live-search-style="begins"  title="Select your city" >
+                                        <option selected="true" disabled="disabled">---Choose City---</option>
+                                        <option *ngFor='let cityList of city' [value]="cityList.id">
+                                          {{cityList.name}}
+                                        </option>
+                                      </select>
+                                  </div>
+                                  <div class="form-group">                                     
+                                      <select id="basic2" class="selectpicker show-tick form-control">
+                                          <option selected="true" disabled="disabled">-Status-</option>
+                                          <option>Sell </option>
+                                          <option>Buy</option>
+                                      </select>
+                                  </div>
+                                  <button class="btn search-btn" type="submit"><i class="fa fa-search" ></i></button>
+                             
+                                   
+  
+                              </form>
+                            </div>
+                      </div>
+                    </div>  
+                  </div>
+                </div>
+              </div>  
+              

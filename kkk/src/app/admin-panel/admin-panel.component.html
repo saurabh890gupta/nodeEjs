@@ -1,0 +1,669 @@
+<div class="admin">
+    <div class="container">
+        <div class="row">
+        <!-- <div class="col-lg-12 col-sm-12 col-xs-12 alert alert-success" ng-show="isDisplay">
+            <strong>{{successMessage }}</strong>
+        </div> -->
+            <div class="col-md-4">
+                <h4>Welcome Admin</h4>
+            </div>
+            <div class="col-md-4">
+                <nav>
+                    <ul>
+                        <li (click)="user(1)"><a > User</a></li>
+                        <li (click)="user(2)"><a>property</a></li>
+                        <li (click)="user(3)"><a >Contact</a></li>
+                        <li (click)="user(4)"><a >Adrress</a></li>
+                        <li (click)="logOut()"><a style="border-radius:4px;padding:9px; background-color:#ff8000; color: white">Logout</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+            <div class="row">
+            
+                <div class="col-md-12">
+            
+                    <div class="jumbotron">
+                    
+                        <!--start first user tab  -->
+                        <div *ngIf="isSet==1">
+                        <p>User Details</p>
+                            <div class="row">
+                            <div class="col-md-12">
+                                <form>
+                                    <div class="form-group">
+                                        <label>Search:</label>
+                                        <input type="text" class="form-control" placeholder="Search" (keyup)="searchEnter($event)">
+                                    </div>
+                                    <div class="table-responsive"> 
+                                        <div class="nofound" *ngIf="IsVisible">
+                                                <p >No data found</p>
+                                        </div> 
+                                        <table class="table table-bordered table-hover table-striped" *ngIf="!IsVisible">  
+                                        
+                                            <thead >  
+                                                <tr>  
+                                                    <th>Serial.No</th>   
+                                                    <!-- <th>Id</th>       -->
+                                                    <th>User Name</th>  
+                                                    <th>Email</th>  
+                                                    <th>Status</th> 
+                                                    <th>Address</th> 
+                                                    <!-- <th>Contact</th>   -->
+                                                    <!-- <th>city</th>  
+                                                    <th>State</th>   -->
+                                                    <th style="text-align:center">Action</th>  
+                                                </tr>
+                                            </thead> 
+                                        
+                                            <tbody *ngFor="let userdata of userData | paginate:userConfig ; let ind=index" >
+                                                <tr>
+                                                    <td>
+                                                       
+                                                        <div > {{ this.userConfig.itemsPerPage * (this.userConfig.currentPage - 1) + ind+1}}</div>
+                                                   
+                                                    </td>
+                                                    <!-- <td> -->
+                                                        <!-- <div *ngIf="ind==rowIndex">
+                                                                <input type="text" [(ngModel)]="userdata._id" name="userdata._id">
+                                                             {{userdata.user_name}} -->
+                                                            <!-- </div>
+                                                            <div *ngIf="ind!=rowIndex">
+                                                                    
+                                                                    {{userdata._id}}
+                                                                </div>  -->
+                                                    <!-- <div>{{userdata._id}}</div> -->
+                                                    <!-- </td> -->
+                                                    <td>
+                                                        <div *ngIf="ind==rowIndex">
+                                                        <input type="text" [(ngModel)]="userdata.user_name" name="userdata.user_name">
+                                                    <!-- {{userdata.user_name}} -->
+                                                    </div>
+                                                    <div *ngIf="ind!=rowIndex">
+                                                            
+                                                        {{userdata.user_name}}
+                                                        </div>
+                                                    </td>
+                                                    <td> 
+                                                        <div *ngIf="ind==rowIndex">
+                                                                <input type="text" [(ngModel)]="userdata.email" name="userdata.email">
+                                                            <!-- {{userdata.user_name}} -->
+                                                            </div>
+                                                            <div *ngIf="ind!=rowIndex">
+                                                                    
+                                                                {{userdata.email}}
+                                                                </div>
+                                                    <!-- <div >{{userdata.email}}</div> -->
+                                                    </td>
+                                                    <td> 
+                                                        <div *ngIf="ind==rowIndex">
+                                                                <input type="text" [(ngModel)]="userdata.account_status" name="userdata.account_status">
+                                                            <!-- {{userdata.user_name}} -->
+                                                        </div>
+                                                        <div *ngIf="ind!=rowIndex"> 
+                                                            <div *ngIf="userdata.account_status==0"> 
+                                                                <!-- {{userdata.account_status}} -->
+                                                                    Inactivete
+                                                            </div>
+                                                            <div *ngIf="userdata.account_status==1"> 
+                                                                    Activate
+                                                                <!-- {{userdata.account_status}} -->
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div *ngIf="ind==rowIndex">
+                                                                <input type="text" [(ngModel)]="userdata.address" name="userdata.address">
+                                                            <!-- {{userdata.user_name}} -->
+                                                        </div>
+                                                        <div *ngIf="ind!=rowIndex">
+                                                            {{userdata.address}}
+                                                        </div>
+                                                    <!-- <div >{{userdata.address}}</div> -->
+                                                    </td>
+                                                    <!-- <td>
+                                                            <div></div>
+                                                    </td>
+                                                    <td>
+                                                        <div ></div>
+                                                    </td>
+                                                    <td>
+                                                        <div ></div>
+                                                    </td> -->
+                                                    <td>
+                                                    <!-- data-toggle="modal" data-target="#exampleModalLong" -->
+                                                        <li><a  (click)="view(ind)" data-toggle="modal" data-target="#exampleModalLong">View</a></li>
+
+                                                        <li ><a (click)="edit(ind)" *ngIf="optionData==true" >Edit</a></li>
+                                                        <li *ngIf="ind!=rowIndex"><a  (click)="edit(ind)" *ngIf="optionData==false">Edit</a></li>
+                                                    
+                                                        <li   *ngIf="ind==rowIndex"><a  (click)="save(ind,userdata)" *ngIf="optionData==false">Save</a></li>
+                                                    
+                                                        <li ><a  (click)="deleteData(userdata._id,ind)">Delete </a>
+                                                    
+                                                        </li>
+                                                    </td>
+                                                </tr>
+                                            
+                                            </tbody> 
+                                        </table> 
+                                        <tfoot >
+                                            <td colspan="3" >
+                                                <div  class="pull-right">
+                                                    <pagination-controls (pageChange)="pageChanged($event)"  ></pagination-controls>
+                                            <!-- <ul>
+                                                <li ng-class="prevPageDisabled()">
+                                                <a href (click)="prevPage()">« Prev</a>
+                                                </li>
+                                                <li ng-repeat="n in range()" ng-class="{active: n == currentPage}" ng-click="setPage(n)">
+                                                <a href="#"></a>
+                                                </li>
+                                                <li ng-class="nextPageDisabled()">
+                                                <a href ng-click="nextPage()">Next »</a>
+                                                </li>
+                                                </ul> -->
+                                                </div>
+                                            </td>
+                                        </tfoot> 
+                                    </div>  
+                                </form>
+                                </div>
+                            </div>
+                        </div>
+            <!--end first user tab  -->
+                    
+                    
+            <!-- second proprty tab -->
+                    
+                    <div *ngIf="isSet==2" >
+                        <div class="row">
+                            <p>Property Details</p>
+                            <div class="col-md-12">
+                                <form>
+                                    <div class="form-group">
+                                        <label>Search:</label>
+                                        <input type="text" class="form-control" placeholder="Search the property by propertyname or city" (keyup)="searchEnterProperty($event)">
+                                    </div>
+                                    <div class="table-responsive"> 
+                                        <div class="nofound" *ngIf="IsVisible">
+                                                <p >No data found</p>
+                                        </div> 
+                                            <table class="table table-bordered table-hover table-striped" *ngIf="!IsVisible">  
+                                        
+                                                <thead >  
+                                                    <tr> 
+                                                        <th>Serial.No</th>   
+                                                        <!-- <th>Id</th>       -->
+                                                        <th>Property Name</th>  
+                                                        <th>Price</th>  
+                                                        <th>Status</th> 
+                                                        <th>City</th>
+                                                        <th>State</th>
+                                                        <th>Area</th> 
+                                                        <th style="text-align:center">Action</th>  
+                                                    </tr>     
+                                                </thead> 
+                                        
+                                                <tbody *ngFor="let propertydata of propertyData | paginate:propertyConfig;let ind=index ">
+                                            
+                                                    <tr>   
+                                                        <td>
+                                                            <div >{{this.propertyConfig.itemsPerPage * (this.propertyConfig.currentPage - 1) + ind+1}}</div>
+                                                        </td>
+                                                        <!-- <td>
+                                                            <div>{{propertydata._id}}</div>
+                                                        </td> -->
+                                                        <td>
+                                                                <div *ngIf="ind==rowIndex">
+                                                                        <input type="text" [(ngModel)]="propertydata.propertyname" name="propertydata.propertyname">
+                                                                </div>
+                                                            <div *ngIf="ind!=rowIndex">   
+                                                                {{propertydata.propertyname}}
+                                                            </div> 
+                                                        </td>
+                                                        <td> 
+                                                                <div *ngIf="ind==rowIndex">
+                                                                        <input type="text" [(ngModel)]="propertydata.propertyprice" name="propertydata.propertyprice">
+                                                                </div>
+                                                            <div *ngIf="ind!=rowIndex"> 
+                                                                    {{propertydata.propertyprice}}
+                                                            </div>
+                                                        </td>
+                                                        <td>  
+                                                            <div *ngIf="ind==rowIndex">
+                                                                <input type="text" [(ngModel)]="propertydata.propertystatus" name="propertydata.propertystatus">
+                                                            </div>
+                                                            <div *ngIf="ind!=rowIndex"> 
+                                                                    {{propertydata.propertystatus}}
+                                                            </div>
+                                                        </td>
+                                                        <td> 
+                                                            <div *ngIf="ind==rowIndex">
+                                                                <input type="text" [(ngModel)]="propertydata.propertycity" name="propertydata.propertycity">
+                                                            </div>
+                                                            <div *ngIf="ind!=rowIndex"> 
+                                                               {{propertydata.propertycity}}
+                                                            </div>
+                                                        
+                                                        </td>
+                                                        <td>  
+                                                            <div *ngIf="ind==rowIndex">
+                                                                <input type="text" [(ngModel)]="propertydata.propertystate" name="propertydata.propertystate">
+                                                            </div>
+                                                            <div *ngIf="ind!=rowIndex"> 
+                                                                {{propertydata.propertystate}}
+                                                            </div>
+                                                            
+                                                        </td>
+                                                        <td> 
+                                                            <div *ngIf="ind==rowIndex">
+                                                                <input type="text" [(ngModel)]="propertydata.propertyarea" name="propertydata.propertyarea">
+                                                            </div>
+                                                            <div *ngIf="ind!=rowIndex">
+                                                                {{propertydata.propertyarea}}
+                                                            </div>
+                                                                  
+                                                        </td>
+                                                        <td>
+                                                           
+                                                            <!-- data-toggle="modal" data-target="#exampleModalLong" -->
+                                                            <li><a (click)="propertyView(ind)" data-toggle="modal" data-target="#exampleModalLongProperty">View</a></li>
+
+                                                            <li ><a (click)="proprtyEdit(ind)" *ngIf="optionData==true" >Edit</a></li>
+                                                            <li *ngIf="ind!=rowIndex"><a (click)="proprtyEdit(ind)" *ngIf="optionData==false">Edit</a></li>
+                                                            
+                                                            <li *ngIf="ind==rowIndex"><a (click)="proprtySave(ind,propertydata)" *ngIf="optionData==false">Save</a></li>
+                                                            
+                                                            <li ><a (click)="propertyDeleteData(propertydata._id,ind)">Delete </a>
+                                                            
+                                                            </li>
+                                                        
+                                                        </td>
+                                                    </tr>    
+                                                </tbody> 
+                                            </table> 
+                                            <tfoot >
+                                                <td colspan="3" >
+                                                    <div  class="pull-right" >
+                                                        <pagination-controls (pageChange)="pageChanged1($event)" ></pagination-controls>
+                                                    <!-- <ul>
+                                                        <li ng-class="prevPageDisabled()">
+                                                        <a href (click)="prevPage()">« Prev</a>
+                                                        </li>
+                                                        <li ng-repeat="n in range()" ng-class="{active: n == currentPage}" ng-click="setPage(n)">
+                                                        <a href="#"></a>
+                                                        </li>
+                                                        <li ng-class="nextPageDisabled()">
+                                                        <a href ng-click="nextPage()">Next »</a>
+                                                        </li>
+                                                    </ul> -->
+                                                    </div>
+                                                </td>
+                                            </tfoot> 
+                                    </div>  
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+            <!--end second proprty tab  -->
+            
+            
+                    <div *ngIf="isSet==3">
+                        <div class="row">
+                            <p>Contact Details</p>
+                            <div class="col-md-12">
+                            <form>
+                                    <div class="form-group">
+                                        <label>Search:</label>
+                                        <input type="text" class="form-control" placeholder="Search the contact by name or email" (keyup)="searchEnterContact($event)">
+                                    </div>
+                                    <div class="table-responsive"> 
+                                        <div class="nofound" *ngIf="IsVisible">
+                                                <p >No data found</p>
+                                        </div> 
+                                            <table class="table table-bordered table-hover table-striped" *ngIf="!IsVisible">  
+                                        
+                                                <thead >  
+                                                    <tr> 
+                                                        <th>Serial.No</th>   
+                                                        <!-- <th>Id</th>       -->
+                                                        <th>Name</th>  
+                                                        <th>Email</th>  
+                                                        <th>Contact</th> 
+                                                        <th>Addres</th>
+                                                        <th>Query</th>
+                                                        
+                                                        <th style="text-align:center">Action</th>  
+                                                    </tr>     
+                                                </thead> 
+                                        
+                                                <tbody *ngFor="let contactdata of this.contactData | paginate:contactConfig;let ind=index ">
+                                                
+                                                    <tr>   
+                                                        <td>
+                                                            <div >{{this.contactConfig.itemsPerPage * (this.contactConfig.currentPage - 1) + ind+1}}</div>
+                                                        </td>
+                                                        <!-- <td>
+                                                            <div>{{propertydata._id}}</div>
+                                                        </td> -->
+                                                        <td>
+                                                                <div *ngIf="ind==rowIndex">
+                                                                        <input type="text" [(ngModel)]="contactdata.name" name="contactdata.name">
+                                                                </div>
+                                                            <div *ngIf="ind!=rowIndex">   
+                                                                {{contactdata.name}}
+                                                            </div> 
+                                                        </td>
+                                                        <td> 
+                                                                <div *ngIf="ind==rowIndex">
+                                                                        <input type="text" [(ngModel)]="contactdata.email" name="contactdata.email">
+                                                                </div>
+                                                            <div *ngIf="ind!=rowIndex"> 
+                                                                    {{contactdata.email}}
+                                                            </div>
+                                                        </td>
+                                                        <td>  
+                                                            <div *ngIf="ind==rowIndex">
+                                                                <input type="text" [(ngModel)]="contactdata.contact" name="contactdata.contact">
+                                                            </div>
+                                                            <div *ngIf="ind!=rowIndex"> 
+                                                                    {{contactdata.contact}}
+                                                            </div>
+                                                        </td>
+                                                        <td> 
+                                                            <div *ngIf="ind==rowIndex">
+                                                                <input type="text" [(ngModel)]="contactdata.address" name="contactdata.address">
+                                                            </div>
+                                                            <div *ngIf="ind!=rowIndex"> 
+                                                               {{contactdata.address}}
+                                                            </div>
+                                                        
+                                                        </td>
+                                                        <td> 
+                                                            <div *ngIf="ind==rowIndex">
+                                                                <input type="text" [(ngModel)]="contactdata.query" name="contactdata.query">
+                                                            </div>
+                                                            <div *ngIf="ind!=rowIndex">
+                                                                {{contactdata.query}}
+                                                            </div>
+                                                                  
+                                                        </td>
+                                                        <td>
+                                                           
+                                                            <!-- data-toggle="modal" data-target="#exampleModalLong" -->
+                                                            <li><a (click)="contactView(ind)" data-toggle="modal" data-target="#exampleModalLongContact">View</a></li>
+
+                                                            <li ><a (click)="contactEdit(ind)" *ngIf="optionData==true" >Edit</a></li>
+                                                            <li *ngIf="ind!=rowIndex"><a (click)="contactEdit(ind)" *ngIf="optionData==false">Edit</a></li>
+                                                            
+                                                            <li *ngIf="ind==rowIndex"><a (click)="contactSave(ind,contactdata)" *ngIf="optionData==false">Save</a></li>
+                                                            
+                                                            <li ><a (click)="contactDeleteData(contactdata._id,ind)">Delete </a>
+                                                            
+                                                            </li>
+                                                        
+                                                        </td>
+                                                    </tr>    
+                                                </tbody> 
+                                            </table> 
+                                            <tfoot >
+                                                <td colspan="3" >
+                                                    <div  class="pull-right">
+                                                        <pagination-controls (pageChange)="pageChanged2($event)" ></pagination-controls>
+                                                    <!-- <ul>
+                                                        <li ng-class="prevPageDisabled()">
+                                                        <a href (click)="prevPage()">« Prev</a>
+                                                        </li>
+                                                        <li ng-repeat="n in range()" ng-class="{active: n == currentPage}" ng-click="setPage(n)">
+                                                        <a href="#"></a>
+                                                        </li>
+                                                        <li ng-class="nextPageDisabled()">
+                                                        <a href ng-click="nextPage()">Next »</a>
+                                                        </li>
+                                                    </ul> -->
+                                                    </div>
+                                                </td>
+                                            </tfoot> 
+                                    </div>  
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="isSet==4">
+                        <div class="row">
+                            <p>Billing Address Details</p>
+                            <div class="col-md-12">
+                                    <form>
+            
+                                            <div class="form-group">
+                                                <label>Search:</label>
+                                                <input type="text" class="form-control" placeholder="Search the address by firstname or city" (keyup)="searchEnterBilling($event)">
+                                            </div>
+                                            <div class="table-responsive"> 
+                                                <div class="nofound" *ngIf="IsVisible">
+                                                        <p >No data found</p>
+                                                </div> 
+                                                    <table class="table table-bordered table-hover table-striped" *ngIf="!IsVisible">  
+                                                
+                                                        <thead >  
+                                                            <tr> 
+                                                                <th>Serial.No</th>   
+                                                                <!-- <th>Id</th>       -->
+                                                                <th>FirstName</th>  
+                                                                <th>LastName:</th>  
+                                                                <th>Contact</th> 
+                                                                <th>Address</th>
+                                                                <th>postcode</th>
+                                                                <th>City</th>
+                                                                <th>Country</th>
+                                                                <th style="text-align:center">Action</th>  
+                                                            </tr>     
+                                                        </thead> 
+                                                
+                                                        <tbody *ngFor="let billingdata of this.billingData | paginate:billingConfig;let inde=index ">
+                                                        
+                                                            <tr>   
+                                                                <td>
+                                                                    <!-- {{inde+1}} -->
+                                                                    <div >{{this.billingConfig.itemsPerPage * (this.billingConfig.currentPage - 1) + inde+1}}</div>
+                                                                </td>
+                                                                <!-- <td>
+                                                                    <div>{{propertydata._id}}</div>
+                                                                </td> -->
+                                                                <td>
+                                                                        <div *ngIf="inde==rowIndexbilling">
+                                                                                <input type="text" [(ngModel)]="billingdata.firstName" name="billingdata.firstName">
+                                                                        </div>
+                                                                    <div *ngIf="inde!=rowIndexbilling">   
+                                                                        {{billingdata.firstName}}
+                                                                    </div> 
+                                                                </td>
+                                                                <td> 
+                                                                        <div *ngIf="inde==rowIndexbilling">
+                                                                                <input type="text" [(ngModel)]="billingdata.lastName" name="billingdata.lastName">
+                                                                        </div>
+                                                                    <div *ngIf="inde!=rowIndexbilling"> 
+                                                                            {{billingdata.lastName}}
+                                                                    </div>
+                                                                </td>
+                                                                <td>  
+                                                                    <div *ngIf="inde==rowIndexbilling">
+                                                                        <input type="text" [(ngModel)]="billingdata.mobile" name="billingdata.mobile">
+                                                                    </div>
+                                                                    <div *ngIf="inde!=rowIndexbilling"> 
+                                                                            {{billingdata.mobile}}
+                                                                    </div>
+                                                                </td>
+                                                                <td> 
+                                                                    <div *ngIf="inde==rowIndexbilling">
+                                                                        <input type="text" [(ngModel)]="billingdata.address" name="billingdata.address">
+                                                                    </div>
+                                                                    <div *ngIf="inde!=rowIndexbilling"> 
+                                                                       {{billingdata.address}}
+                                                                    </div>
+                                                                
+                                                                </td>
+                                                                <td> 
+                                                                    <div *ngIf="inde==rowIndexbilling">
+                                                                        <input type="text" [(ngModel)]="billingdata.postcode" name="billingdata.postcode">
+                                                                    </div>
+                                                                    <div *ngIf="inde!=rowIndexbilling">
+                                                                        {{billingdata.postcode}}
+                                                                    </div>
+                                                                          
+                                                                </td>
+                                                                <td> 
+                                                                        <div *ngIf="inde==rowIndexbilling">
+                                                                            <input type="text" [(ngModel)]="billingdata.city" name="billingdata.city">
+                                                                        </div>
+                                                                        <div *ngIf="inde!=rowIndexbilling">
+                                                                            {{billingdata.city}}
+                                                                        </div>
+                                                                              
+                                                                    </td>
+                                                                    <td> 
+                                                                            <div *ngIf="inde==rowIndexbilling">
+                                                                                <input type="text" [(ngModel)]="billingdata.country" name="billingdata.country">
+                                                                            </div>
+                                                                            <div *ngIf="inde!=rowIndexbilling">
+                                                                                {{billingdata.country}}
+                                                                            </div>
+                                                                                  
+                                                                        </td>
+                                                                <td>
+                                                                   
+                                                                    <!-- data-toggle="modal" data-target="#exampleModalLong" -->
+                                                                    <li><a (click)="billingView(inde)" data-toggle="modal" data-target="#exampleModalLongBilling">View</a></li>
+        
+                                                                    <li ><a (click)="billingEdit(inde)" *ngIf="optionData==true" >Edit</a></li>
+                                                                    <li *ngIf="inde!=rowIndexbilling"><a (click)="billingEdit(inde)" *ngIf="optionData==false">Edit</a></li>
+                                                                    
+                                                                    <li *ngIf="inde==rowIndexbilling"><a (click)="billingSave(inde,billingdata)" *ngIf="optionData==false">Save</a></li>
+                                                                    
+                                                                    <li ><a (click)="billingDeleteData(billingdata._id,inde)">Delete </a>
+                                                                    
+                                                                    </li>
+                                                                
+                                                                </td>
+                                                            </tr>    
+                                                        </tbody> 
+                                                    </table> 
+                                                    <tfoot >
+                                                        <td colspan="3" >
+                                                            <div  class="pull-right">
+                                                                <pagination-controls (pageChange)="pageChanged3($event)" ></pagination-controls>
+                                                            <!-- <ul>
+                                                                <li ng-class="prevPageDisabled()">
+                                                                <a href (click)="prevPage()">« Prev</a>
+                                                                </li>
+                                                                <li ng-repeat="n in range()" ng-class="{active: n == currentPage}" ng-click="setPage(n)">
+                                                                <a href="#"></a>
+                                                                </li>
+                                                                <li ng-class="nextPageDisabled()">
+                                                                <a href ng-click="nextPage()">Next »</a>
+                                                                </li>
+                                                            </ul> -->
+                                                            </div>
+                                                        </td>
+                                                    </tfoot> 
+                                            </div>  
+                                        </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </div>
+</div>
+  
+  <!-- this. for User Details model -->
+    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+             <strong>UserDetail</strong> 
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body"> 
+                <p> <strong> USER_Id : </strong> {{this.copyuserdata._id}}</p> 
+                <p> <strong> NAME : </strong> {{ this.copyuserdata.user_name}}</p> 
+                <p> <strong>  EMAIL : </strong> {{this.copyuserdata.email}}</p>
+                <p> <strong> STATUS : </strong> {{ this.copyuserdata.account_status}}</p> 
+                <p><strong> ADDRESS : </strong> {{this.copyuserdata.address}}</p> 
+            </div>  
+          </div>
+        </div>
+    </div> 
+<!-- this. for User Details model-->
+    
+    <div class="modal fade" id="exampleModalLongProperty" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+             <strong>PropertyDetail</strong> 
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body"> 
+                <p> <strong> Property_Id : </strong> {{this.copyPropertydata._id}}</p> 
+                <p> <strong> Property_Name : </strong> {{this.copyPropertydata.propertyname}}</p> 
+                <p> <strong>  Property_Price: </strong> {{this.copyPropertydata.propertyprice}}</p>
+                <p> <strong> Property_Status : </strong> {{this.copyPropertydata.propertystatus}}</p> 
+                <p><strong> Proprty_City : </strong> {{this.copyPropertydata.propertycity}}</p> 
+                <p> <strong> Property_State : </strong> {{this.copyPropertydata.propertystate}}</p> 
+                <p> <strong> Property_Area : </strong> {{this.copyPropertydata.propertyarea}}</p> 
+                <p> <strong>  Property_Phone: </strong> {{this.copyPropertydata.phone}}</p>
+                <p> <strong> Property_descreption : </strong> {{this.copyPropertydata.propertydescreption}}</p> 
+               
+            </div>  
+          </div>
+        </div>
+    </div> 
+    <div class="modal fade" id="exampleModalLongContact" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                 <strong>Contact Details</strong> 
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body"> 
+                    <p> <strong> Conatct_id: </strong> {{this.copyuserdata._id}}</p> 
+                    <p> <strong> Name: </strong> {{ this.copycontactData.name}}</p> 
+                    <p> <strong>  Email: </strong> {{this.copycontactData.email}}</p>
+                    <p> <strong> Contact : </strong> {{ this.copycontactData.contact}}</p> 
+                    <p><strong> Address : </strong> {{this.copycontactData.address}}</p> 
+                    <p><strong> Query : </strong> {{this.copycontactData.query}}</p> 
+                </div>  
+            </div>
+        </div>
+    </div> 
+    <div class="modal fade" id="exampleModalLongBilling" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                     <strong>Contact Details</strong> 
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body"> 
+                        <p> <strong> Billing_id: </strong> {{ this.copybillingData._id}}</p> 
+                        <p> <strong> Full Name: </strong> {{  this.copybillingData.firstName}} {{this.copybillingData.lastName}} </p>
+                        <p> <strong> Contact : </strong> {{   this.copybillingData.mobile}}</p> 
+                        <p><strong> Address : </strong> {{ this.copybillingData.address}}</p> 
+                        <p> <strong> PinCode: </strong> {{ this.copybillingData.postcode }}</p>
+                        <p><strong> City: </strong> {{ this.copybillingData.city}}</p> 
+                        <p> <strong> State: </strong> {{ this.copybillingData.state}}</p>
+                        <p><strong>Country : </strong> {{  this.copybillingData.country}}</p> 
+                        <p><strong>PaymentMode : </strong> {{this.copybillingData.paymentMode}}</p>
+                        <p><strong>User_Id: </strong> {{  this.copybillingData.user_id}}</p>  
+                    </div>  
+                </div>
+            </div>
+        </div> 

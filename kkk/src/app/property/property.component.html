@@ -1,0 +1,324 @@
+<!-- <div ng-include="'/tamplate/slideshow.html'"></div> -->
+<div class="about">
+  <div class="container">
+     
+              <form>
+                     
+                      <h3 style="text-align:center">
+                              <b>Submit</b> YOUR PROPERTY <br/>
+                              <small>According to own way</small>
+                          </h3>
+                          <div >
+                              
+                                        <ul class="nav nav-pills nav-stacked">
+                                          <li class="{ active: isSet(1) }"  index="0">
+                                              <a (click)="setTab(1)">STEP-1</a>
+                                          </li>
+                                          <li class="{ active: isSet(2) }"  index="1">
+                                              <a (click)="setTab(2)">STEP-2</a>
+                                          </li>
+                                          <li class="{ active: isSet(3) }" index="2">
+                                              <a  (click)="setTab(3)">STEP-3</a>
+                                          </li>
+                                          <li class="{ active: isSet(4) }" index="3">
+                                              <a (click)="setTab(4)">STEP-4</a>
+                                          </li>
+                                        </ul>
+                              
+                                      <h4 style="text-align:center">Submit form</h4>
+                              <div class="row">
+                                      
+                                  <div class="col-md-12">
+                                      <div class="jumbotron">
+                                          <div *ngIf="isSet(1)">
+                                              <div class="row">
+                                                  
+                                                  <div class="col-md-4">
+                                                        <div class="form-group">
+                                                        <label>User Profile Image <small>(required)</small></label>
+                                                      <div class="picture">
+                                                          <input type="file" class="input-file" name="propertyimage" id="file" fileinput="file" fileput="file" #fileInput name="myImage" (change)="fileSelected($event)" />
+                                                          <div class="add-file"><i class="fa fa-plus" aria-hidden="true"></i><br> <span>Add File</span></div>
+                                                          <img [src]="imageSrc" class="img-responsive add-file-img" />
+                                                      </div>
+                                                     </div>
+                                                  </div>
+                                                  
+                                                  <div class="col-md-8">
+                                                        <div class="form-group">
+                                                          <label>Property name <small>(required)</small></label>
+                                                          <input name="propertyname" type="text" class="form-control" placeholder="Super villa ..." [(ngModel)]="property.propertyname">
+                                                      
+                                                        </div>
+                                                        <div class="form-group">
+                                                          <label>Property price <small>(required)</small></label>
+                                                          <input name="propertyprice" type="text" class="form-control" ref="propertyprice" id="propertyprice" placeholder="3330000" [(ngModel)]="property.propertyprice"  >
+                                                      
+                                                        </div> 
+                                                        <div class="form-group">
+                                                          <label>Telephone <small>(empty if you wanna use default phone number)</small></label>
+                                                          <input name="phone" type="text" class="form-control" id="phone" min="10" maxlength="10" ref="phone"  placeholder="+632-221-2221" [(ngModel)]="property.phone" >
+                                                                <!-- <p id="phonevarify"></p> -->
+                                                        </div> 
+      
+                                                      <!-- <p><a class="btn btn-primary btn-lg" role="button">Learn more</a></p> -->
+                                                  </div>
+                                              </div>
+                                                <div class="space"></div>
+                                                  <div class="pull-right">
+                                                      <a (click)="setTab(2)" class='btn btn-next btn-primary' id="next" data-toggle="tab">next </a>
+                                                  </div>
+                                                  
+                                          </div>
+                                          
+                                          <div *ngIf="isSet(2)">
+                                              <div class="row">
+                                                  <div class="col-sm-12"> 
+                                                      <div class="form-group">
+                                                          <label>Property Description :</label>
+                                                          <textarea name="propertydescreption"  class="form-control"  id="propertydescreption" ref="propertydescreption"  [(ngModel)]="property.propertydescreption" > </textarea>
+                                                          
+                                                      </div> 
+                                                  </div> 
+                                              </div>
+                                              <div class="row">
+                                                  <div class="col-sm-3">
+                                                      <div class="form-group">
+                                                          <label>Property State :</label>
+                                                          <select id="lunchBegins"  class="selectpicker show-tick form-control" data-live-search="true" data-live-search-style="begins" title="Select your state" name="stateList" [(ngModel)]="property.propertystate" [ngModelOptions]="{standalone: true}" >
+                                                            <option selected="true" disabled="disabled">Choose City</option>
+                                                            <option *ngFor='let stateList of state' [ngValue]="stateList.name">
+                                                              {{stateList.name}}
+                                                            </option>   
+                                                            <!-- <option>Utter Pradesh</option>
+                                                              <option>Delhi</option> -->
+                                                          </select>
+                                                      </div>
+                                                  </div>
+                                                  <div class="col-sm-3">
+                                                      <div class="form-group">
+                                                          <label>Property City :</label>
+                                                          <select id="lunchBegins"  class="selectpicker show-tick form-control" data-live-search="true" data-live-search-style="begins" title="Select your city" name="cityList"[(ngModel)]="property.propertycity" [ngModelOptions]="{standalone: true}" >
+                                                            <option selected="true" disabled="disabled">Choose City</option>
+                                                            <option *ngFor='let cityList of city' [ngValue]="cityList.name">
+                                                              {{cityList.name}}
+                                                            </option> 
+                                                            <!-- <option>Noida</option>
+                                                              <option>Ghaziabad</option>
+                                                              <option>Greater Noida</option>
+                                                              <option>Delhi Local</option> -->  
+                                                          </select>
+                                                      </div>
+                                                  </div>
+                                                  <div class="col-sm-3">
+                                                      <div class="form-group">
+                                                          <label>Property Statue  :</label>
+                                                          <select id="basic" class="selectpicker show-tick form-control" [(ngModel)]="property.propertystatus" name="statusList" [ngModelOptions]="{standalone: true}" >
+                                                              <option selected="true" disabled="disabled"> -Status- </option>
+                                                              <option *ngFor='let statusList of status' [ngValue]="statusList.name">
+                                                                {{statusList.name}}
+                                                              </option> 
+                                                              <!-- <option value="Rent">Rent </option>
+                                                              <option value="Buy">Buy</option> -->
+                                                           </select>
+                                                      </div>
+                                                  </div>
+                                                  <div class="col-sm-3">
+                                                      <div class="form-group">
+                                                          <label>Lease Perioud :</label>
+                                                          <select id="basic" class="selectpicker show-tick form-control" name="propertyleaseperioud"  [(ngModel)]="property.propertyleaseperioud" [ngModelOptions]="{standalone: true}" >
+                                                              <option selected="true" disabled="disabled"> -Status- </option>
+                                                              <option *ngFor='let leasePeriod of leasePeriod' [ngValue]="leasePeriod.name">
+                                                                {{leasePeriod.name}}
+                                                              </option>
+                                                              <!-- <option>1 year </option>
+                                                              <option>2 year </option>
+                                                              <option>3 year</option>   -->
+                                                          </select>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <div class="row">
+                                                  <div class="col-sm-6">
+                                                      <div class="form-group">
+                                                          <label >Min bed :</label>
+                                                          <input type="text" class="form-control" name="minbed" [(ngModel)]="property.propertyminbed" />
+                                                      </div>
+                                                  </div>
+                                                          
+                                                  <div class="col-sm-6">
+                                                      <div class="form-group">
+                                                          <label >Property Area  :</label>
+                                                          <input type="text" class="form-control" name="area" [(ngModel)]="property.propertyarea" />
+                                                      </div> 
+                                                  </div> 
+                                              </div>
+                                              <div class="row">
+                                                  <div class="col-sm-3">
+                                                      <div class="form-group">
+                                                          <div class="checkbox">
+                                                              <label>
+                                                                  <input type="checkbox" value="Swimming Pool" name="swimmingpool" [(ngModel)]="property.propertySwimmingpool"  /> Swimming Pool
+                                                              </label>
+                                                          </div>
+                                                      </div>
+                                                  </div> 
+                                                  <div class="col-sm-3">
+                                                      <div class="form-group">
+                                                          <div class="checkbox">
+                                                              <label>
+                                                                  <input type="checkbox" value="2 Stories" name="stories"  [(ngModel)]="property.propertyStories" /> 2 Stories
+                                                              </label>
+                                                          </div>
+                                                      </div>
+                                                  </div>                                                 
+                                                  <div class="col-sm-3">
+                                                      <div class="form-group">
+                                                          <div class="checkbox">
+                                                              <label>
+                                                                  <input type="checkbox" name="exit" value="Emergency Exit"  [(ngModel)]="property.propertyexit"  /> Emergency Exit
+                                                              </label>
+                                                          </div>
+                                                      </div>
+                                                  </div>                                                 
+                                                  <div class="col-sm-3">
+                                                      <div class="form-group">
+                                                          <div class="checkbox">
+                                                              <label>
+                                                                  <input type="checkbox" value="Fire Place"  name="fireplace" ex [(ngModel)]="property.propertyrireplace" /> Fire Place 
+                                                              </label>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <div class="row">
+                                                  <div class="col-sm-3">
+                                                      <div class="form-group">
+                                                          <div class="checkbox">
+                                                              <label>
+                                                                  <input type="checkbox" value="Laundry Room"  name="laundryroom" [(ngModel)]="property.propertylaundryroom"/> Laundry Room
+                                                              </label>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                                  <div class="col-sm-3">
+                                                      <div class="form-group">
+                                                          <div class="checkbox">
+                                                              <label>
+                                                                  <input type="checkbox" value="Jog Path" name="jogpath" [(ngModel)]="property.propertyJogpath" /> Jog Path
+                                                              </label>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                                  <div class="col-sm-3">
+                                                      <div class="form-group">
+                                                          <div class="checkbox">
+                                                              <label>
+                                                                  <input type="checkbox" value="Ceilings" name="ceilings" [(ngModel)]="property.propertyCeilings"/> Ceilings
+                                                              </label>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                                  <div class="col-sm-3">
+                                                      <div class="form-group">
+                                                          <div class="checkbox">
+                                                              <label>
+                                                                  <input type="checkbox" value="Dual Sinks" name="dualsinks" [(ngModel)]="property.propertyDualsink" /> Dual Sinks
+                                                              </label>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <div class="space"></div>
+                                                      <div class="pull-right">
+                                                          <a  (click)="setTab(3)" class='btn btn-next btn-primary' id="next" data-toggle="tab">next </a>
+                                                      </div>
+          
+                                                      <div class="pull-left">
+                                                          <a (click)="setTab(1)" class='btn btn-next btn-primary' id="next"  data-toggle="tab">previous</a>
+                                                      </div>
+                                                       
+                                                   
+                                          </div>
+                                          <div *ngIf="isSet(3)" >
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <input  type="file" multiple  #fileInputs name="myImage"(change)="detectFiles($event)">
+                                                            <div id="content">
+                                                                <div id="scrollable">       
+                                                                    <div *ngFor="let url of urls ; let ind=index">
+                                                                        <img  [src]="url" class="rounded mb-3" width="234">
+                                                                    </div>   
+                                                                </div>
+                                                            </div>
+                                                            <p>Total Image: {{totalImage}}</p>
+                                                            <div *ngFor="let helImg of helImg">
+                                                                {{helImg.name}}
+                                                            </div>
+                                                        </div>
+                                                    </div>  
+                                                    <div class="col-md-8">
+                                                      <div class="form-group">
+                                                          <label>Property video :</label>
+                                                          <input type="text" class="form-control" placeholder="http:www.youtube.com, http:vimeo.com" name="video1"[(ngModel)]="property.propertyVideo1"/>
+                                                      </div> 
+              
+                                                      <div className="form-group">
+                                                          <input type="text" class="form-control" placeholder="http:www.youtube.com, http:vimeo.com" name="video2"[(ngModel)]="property.propertyVideo2"/>
+                                                      </div>
+      
+                                                      <div className="form-group">
+                                                          <input type="text" class="form-control" placeholder="http:www.youtube.com, http:vimeo.com" name="video3" [(ngModel)]="property.propertyVideo3" />
+                                                      </div>
+                                                    </div>   
+                                                </div>
+                                            <div class="space"></div>
+                                                <div class="pull-right">
+                                                      <a (click)="setTab(4)" class='btn btn-next btn-primary' id="next" data-toggle="tab">next </a>
+                                                </div>
+                                                <div class="pull-left">
+                                                      <a (click)="setTab(2)" class='btn btn-next btn-primary' id="next"  data-toggle="tab">previous</a>
+                                                </div>        
+                                            </div>
+                                          
+                                          <div *ngIf="isSet(4)" > 
+                                              <h2 style="text-align:center"> Finished and submit </h2>
+                                              <div class="row">  
+                                                  <div class="col-sm-12">
+                                                      <div class="">
+                                                          <p>
+                                                              <label><strong>Terms and Conditions</strong></label>
+                                                              By accessing or using  GARO ESTATE services, such as 
+                                                              posting your property advertisement with your personal 
+                                                              information on our website you agree to the
+                                                              collection, use and disclosure of your personal information 
+                                                              in the legal proper manner
+                                                          </p>
+      
+                                                           <div class="checkbox">
+                                                              <label>
+                                                                  <input type="checkbox" name="checkbox" [(ngModel)]="property.checkBox"> <strong>Accept termes and conditions.</strong>
+                                                              </label>
+                                                          </div> 
+                                                          <div class="space"></div>
+                                                          <div class="pull-right">
+                                                              <input type='submit' class='btn btn-next btn-primary' id="finish" name='finish' value='Finish' (click)="propertySubmit(property)" /> 
+                                                          </div>
+                                                          <div class="pull-left">
+                                                                  <a (click)="setTab(3)" class='btn btn-next btn-primary' id="next"  data-toggle="tab">previous</a>
+                                                          </div> 
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                          
+                                              
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                  </form>
+          </div>
+      </div>
+     

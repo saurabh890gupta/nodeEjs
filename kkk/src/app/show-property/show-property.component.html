@@ -1,0 +1,68 @@
+<div class="banner-down">
+    <div class="container">
+        <div class="row">
+          <h3 style="text-align:center">Property Details</h3>
+            <div class="Property-title-line">
+                <div class="form-inline">
+                    <h4>Search Data According To Own Way:</h4>
+                    
+                    <div class="Search-title-line"></div>
+                    <div class="form-group">
+                        <label>Search:</label>
+                        <input type="text" (keyup)="searchEnter($event)"  class="form-control" placeholder="Search by name or city">
+                    </div>
+                </div> 
+                <ul class="pull-right" *ngIf="isLoggedIn=='true'">
+                    <li (click)="openCart()"><a class="cart"><i class="fa fa-shopping-cart" id="cart"></i> Cart <span class="badge">{{count}}</span></a></li>
+                </ul>
+            </div>
+            <div style="padding-top:12px;"></div>
+            <div id="content">
+                <div id="scrollable"> 
+                            <!-- <div *ngFor= "let img of imgData">
+                                    <img  src="{{img}}" alt="img" />
+                                </div> -->
+                            <div class="nofound" *ngIf="IsVisible">
+                                <p >No data found</p>
+                            </div>
+                    <form *ngFor="let data of somthing ;let ind=index">
+                        <!-- <div class="form-group">
+                                <label>Search:</label>
+                                <input type="text" ng-model="search" class="form-control" placeholder="Search">
+                            </div> -->
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="picture animated zoomIn" (click)="detailsShow(data._id)" >
+                                    <img  src="{{'http://localhost:5050/'+ multiImageData[ind][0]}}" class="img-responsive" id="img001" alt="img" />
+                                    <div class="insidepicture" >
+                                        <h4>{{data.propertyname}} </h4>
+                                        <span class="pull-left"><b>Rs.{{data.propertyprice}}</b></span> 
+                                        <span class="pull-right"><b> Area :</b> 300 </span>
+                                            <br>
+                                        <div class="property-icon">
+                                            <img src="../../assets/images/icon/bed-orange.png" alt="img"/>(5)|&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <img src="../../assets/images/icon/cars-orange.png" alt="img"/>(2)|&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <img src="../../assets/images/icon/os-orange.png" alt="img"/>(1)  
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="datagate animated zoomIn" >
+                                        <p><strong>Owner :</strong>Mr.<span> {{data.propertyname}}</span></p>
+                                    <p><strong>Description :</strong><span> {{data.propertydescreption}}</span></p>
+                                    <p><strong>City :</strong><span> {{data.propertycity}}</span></p>
+                                    <p><strong>State :</strong><span> {{data.propertystate}}</span></p>
+                                    <p><strong>Status :</strong><span> {{data.propertystatus}}</span></p>
+                                    <div class="addCART" *ngIf="isLoggedIn=='true'">
+                                    <button type="button" class="btn btn-success" (click)="addCart(ind,data.propertyname,data.propertycity,data.propertystate,data.propertystatus,multiImageData[ind],data.propertyprice,data._id)" >Add Cart</button> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
