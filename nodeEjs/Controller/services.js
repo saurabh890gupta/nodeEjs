@@ -37,7 +37,7 @@ const emailSend = function(sendmsg){
             service: 'gmail',
             auth: {
                 user: 'jssaurabh.gupta786@gmail.com',
-                pass: 'Kumar@123'
+                pass: ''
             }
         });
         var maillist = [sendmsg.email, 'jssaurabh.gupta786@gmail.com'];
