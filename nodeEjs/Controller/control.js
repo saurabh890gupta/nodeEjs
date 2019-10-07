@@ -117,7 +117,7 @@ module.exports.Signup=(req,res)=>{
                                             service: 'gmail',
                                             auth: {
                                                     user: 'jssaurabh.gupta786@gmail.com',
-                                                    pass: 'Kumar@123'
+                                                    pass: ''
                                                }
                                         });
                                         var maillist=[mydata.email, 'jssaurabh.gupta786@gmail.com'];
@@ -274,7 +274,7 @@ module.exports.Contactus=(req,res)=>{
                         service: 'gmail',
                         auth: {
                             user: 'jssaurabh.gupta786@gmail.com',
-                            pass: 'Kumar@123'
+                            pass: ''
                         }
                     });
                     var maillist = [formData.email, 'jssaurabh.gupta786@gmail.com'];
